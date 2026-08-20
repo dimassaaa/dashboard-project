@@ -9,11 +9,11 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+const sql = postgres(process.env.DATABASE_STORAGE_POSTGRES_URL_NON_POOLING!, { ssl: 'require' });
 
 export async function fetchRevenue() {
   try {
-    // Artificially delay a response for demo purposes.
+    // Artificially delay a response for testing only.
     // Don't do this in production :)
 
     // console.log('Fetching revenue data...');
@@ -52,9 +52,7 @@ export async function fetchLatestInvoices() {
 
 export async function fetchCardData() {
   try {
-    // You can probably combine these into a single SQL query
-    // However, we are intentionally splitting them to demonstrate
-    // how to initialize multiple queries in parallel with JS.
+    // intentionally splitting queries to implement parallel execution for performance optimization.
     const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
     const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
     const invoiceStatusPromise = sql`SELECT
@@ -160,6 +158,8 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
+    console.log(invoice);
+  
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
