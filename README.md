@@ -8,7 +8,11 @@ This is Dashboard Project Demo using App Routing Next.JS
 - Supabase PostgreSQL connection
 - SSR and CSR
 
-## **Where to Check?**
+## **Where to Check & How to Use?**
 Visit this link to look around at this project demo: https://dashboard-project-samid2.vercel.app/
+
+Use this credentials to login.
+email: user@nextemail.com
+password: 123456
 
 i will keep updating this project interface until it looks modern and clean :D.
